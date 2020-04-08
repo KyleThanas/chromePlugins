@@ -1,33 +1,36 @@
 {
   "manifest_version": 2,
-  "name": "kyleThanasDownload",
+  "name": "kt",
   "version": "1.0.0",
-  "description": "kyleThanas扩展功能",
+  "description": "12312",
   "author": "kyleThanas",
   "icons": {
-    "48": "./img/kt48.png",
-    "128": "./img/kt128.png"
+    "48": "img/kt48.png",
+    "128": "img/kt128.png"
   },
-  "permissions": [
-    "activeTab",
-    "contextMenus",
-    "webRequest",
-    "webRequestBlocking"
-  ],
   "background": {
     "page": "background.html"
   },
   "browser_action": {
-    "default_icon": "./img/kt48.png",
+    "default_icon": "img/kt48.png",
     "default_title": "这是一个示例Chrome插件",
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.baidu.com/*"],
-      "js": ["content-script.js"]
+      "matches": ["<all_urls>"],
+      "js": ["jquery-1.8.3.js", "content-script.js"],
+      "run_at": "document_start"
     }
   ],
-  "web_accessible_resources": ["inject.js"],
-  "homepage_url": "http://114.67.228.124/"
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "web_accessible_resources": ["js/inject.js"],
+  "homepage_url": "https://www.baidu.com"
 }
