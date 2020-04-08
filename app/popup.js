@@ -12,8 +12,3 @@ sendMessageToContentScript(
     console.log('来自content的回复：' + response)
   }
 )
-
-// 打开后台页
-$('#open_background').click((e) => {
-  window.open(chrome.extension.getURL('background.html'))
-})
