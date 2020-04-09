@@ -5,19 +5,25 @@
   "description": "kyleThanas、下载加强插件",
   "author": "kyleThanas",
   "icons": {
-    "48": "kt48.png"
+    "48": "ph16.png"
   },
   "browser_action": {
-    "default_icon": "kt48.png",
-    "default_title": "这是一个示例Chrome插件",
+    "default_icon": "ph16.png",
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.jianshu.com/p/*"],
+      "matches": ["https://*.pornhub.com/view_video.php?viewkey=*"],
       "js": ["jquery-1.8.3.js", "content-script.js"]
     }
   ],
-  "permissions": ["webRequest", "webRequestBlocking", "downloads"],
-  "homepage_url": "https://www.yuque.com/kylethanas/share"
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "downloads",
+    "https://*.phncdn.com/*",
+    "https://*.pornhub.com/view_video.php?viewkey=*",
+    "https://*.pornhubpremium.com/view_video.php?viewkey=*"
+  ]
 }

@@ -6,29 +6,16 @@
   })
 }
 
-function downloadFile(options) {
-  if (!options.url) {
-    var blob = new Blob([options.content], {
-      type: 'text/plain;charset=UTF-8'
-    })
-    options.url = window.URL.createObjectURL(blob)
-  }
-  chrome.downloads.download({
-    url: options.url,
-    filename: options.filename
-  })
-}
-
 // 下载视频
-sendMessageToContentScript({ cmd: 'download' }, (result) => {
-  $('#download').attr({ filename: result.filename, fileurl: result.fileurl })
+sendMessageToContentScript({ cmd: 'download' }, ({ filename, fileurl }) => {
+  $('#download').attr({ filename, fileurl })
 })
 
 $('#download').on('click', function () {
   const filename = $('#download').attr('filename')
   const fileurl = $('#download').attr('fileurl')
-  downloadFile({
-    filename,
-    url: fileurl
+  chrome.downloads.download({
+    url: fileurl,
+    filename: String(filename)
   })
 })
