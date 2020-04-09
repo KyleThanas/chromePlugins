@@ -5,8 +5,7 @@
   "description": "kyleThanas、复制",
   "author": "kyleThanas",
   "icons": {
-    "48": "img/kt48.png",
-    "128": "img/kt128.png"
+    "48": "kt48.png"
   },
   "content_scripts": [
     {
