@@ -33,6 +33,7 @@
     "webRequest",
     "webRequestBlocking",
     "storage",
+    "downloads",
     "declarativeContent"
   ],
   "homepage_url": "http://114.67.228.124/"

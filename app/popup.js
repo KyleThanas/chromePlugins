@@ -6,14 +6,36 @@
   })
 }
 
-sendMessageToContentScript(
-  { cmd: 'test', value: '你好，我是popup！' },
-  function (response) {
-    console.log('来自content的回复：' + response)
+function downloadFile(options) {
+  if (!options.url) {
+    var blob = new Blob([options.content], {
+      type: 'text/plain;charset=UTF-8'
+    })
+    options.url = window.URL.createObjectURL(blob)
   }
-)
+  chrome.downloads.download({
+    url: options.url,
+    filename: options.filename
+  })
+}
 
 // 从存储中读取数据
-chrome.storage.local.get('thisWebsite', function (result) {
-  if (result) $('#local').text(result.thisWebsite)
+sendMessageToContentScript({ cmd: 'getStorage' }, () => {
+  chrome.storage.local.get('thisWebsite', function (result) {
+    if (result) $('#local').text(result.thisWebsite)
+  })
+})
+
+// 下载视频
+sendMessageToContentScript({ cmd: 'download' }, (result) => {
+  $('#download').attr({ filename: result.filename, fileurl: result.fileurl })
+})
+
+$('#download').on('click', function () {
+  const filename = $('#download').attr('filename')
+  const fileurl = $('#download').attr('fileurl')
+  downloadFile({
+    filename,
+    url: fileurl
+  })
 })
