@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "kyleThanas复制title",
+  "version": "1.0.0",
+  "description": "kyleThanas、复制",
+  "author": "kyleThanas",
+  "icons": {
+    "48": "img/kt48.png",
+    "128": "img/kt128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.jianshu.com/p/*"],
+      "js": ["jquery-1.8.3.js", "content-script-jianshu.js"]
+    }
+  ]
+}
