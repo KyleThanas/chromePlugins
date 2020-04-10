@@ -5,10 +5,10 @@
   "description": "kyleThanas、下载加强插件",
   "author": "kyleThanas",
   "icons": {
-    "48": "ph16.png"
+    "48": "kt48.png"
   },
   "browser_action": {
-    "default_icon": "ph16.png",
+    "default_icon": "kt48.png",
     "default_popup": "popup.html"
   },
   "content_scripts": [
