@@ -14,11 +14,19 @@
     })
   }
 
+  const filename =
+    ($('.inlineFree:first').text() ||
+      `未命名${Math.random().toString(16).slice(2)}`) + '.mp4'
+
   Func().then((res) => {
-    var videoType = {}
+    var videoType = []
     Object.keys(res).forEach((item) => {
       if (item.startsWith('quality_')) {
-        videoType[item] = res[item]
+        var obj = {
+          key: item,
+          val: res[item]
+        }
+        videoType.push(obj)
       }
     })
     chrome.runtime.onMessage.addListener(function (
@@ -27,24 +35,7 @@
       sendResponse
     ) {
       if (request.cmd == 'download') {
-        // const videoType = {
-        //   quality_1080p: 'http://114.67.228.124/index.mp4',
-        //   quality_720p: 'http://114.67.228.124/mt.mp4',
-        //   quality_480p: 'http://114.67.228.124/mt.mp4',
-        //   quality_240p: 'http://114.67.228.124/mt.mp4'
-        // }
-
-        const response = {
-          fileurl:
-            videoType['quality_1080p'] ||
-            videoType['quality_720p'] ||
-            videoType['quality_480p'] ||
-            videoType['quality_240p'],
-          filename:
-            ($('.inlineFree:first').text() ||
-              `未命名${Math.random().toString(16).slice(2)}`) + '.mp4'
-        }
-        sendResponse(response)
+        sendResponse({ videoType, filename })
       }
     })
   })

@@ -6,16 +6,22 @@
   })
 }
 
-// 下载视频
-sendMessageToContentScript({ cmd: 'download' }, ({ filename, fileurl }) => {
-  $('#download').attr({ filename, fileurl })
+sendMessageToContentScript({ cmd: 'download' }, ({ videoType, filename }) => {
+  var videoStr = ``
+  videoType.forEach((item) => {
+    videoStr += `<p id="${item.key}" filename="${filename}" fileurl="${item.val}">${item.key}</p>`
+  })
+
+  $('#box').html(videoStr)
 })
 
-$('#download').on('click', function () {
-  const filename = $('#download').attr('filename')
-  const fileurl = $('#download').attr('fileurl')
+const download = (dom) => {
   chrome.downloads.download({
-    url: fileurl,
-    filename: String(filename)
+    url: dom.attr('fileurl'),
+    filename: String(dom.attr('filename'))
   })
+}
+
+$(document).on('click', '#box p', function () {
+  download($(this))
 })
